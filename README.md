@@ -26,9 +26,11 @@ Pharma,1996,12312312
 Finance,1997,25612312
 MAP/REDUCE JOB DESIGN
 In order to solve this goal you will need to implement two Map/Reduce jobs: the first one will join the stock dataset with the additional details dataset that is provided as a separate file. The second job will take the joined data, and compute the requested aggregate statistics for each year.
+
 Job 1: Takes /data/NASDAQseq, /data/companyList.tsv datasets. Join them to obtain for each record 'sector', 'daily_stock_volume', and 'year'.
 Job 2: Aggregate all the daily stock volumes for each company and each year.
-JOB 1: JOINING BOTH DATASETS
+
+# JOB 1: JOINING BOTH DATASETS
 The first job will perform the join operation between both datasets.
 As we have covered in the lecture, there are multiple ways to implement joins in MapReduce. Review the lecture slides about joins to see the possible alternatives. You can also check Chapter 12.3 of the Hadoop in Practice book (available online here), and Chapter 5 of MapReduce Design Patterns to get more information about the practical aspects of joining in Hadoop.
 
