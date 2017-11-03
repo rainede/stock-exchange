@@ -16,32 +16,32 @@ enum CustomCounters {NUM_COMPANIES}
 
 public class StockCompanyReplJoin {
     public static void runJob(String[] input, String output) throws Exception {
-         
+
         Job job = Job.getInstance(new Configuration());
         Configuration conf = job.getConfiguration();
-        
+
         job.setJarByClass(StockCompanyReplJoin.class);
         job.setMapperClass(StockCompanyReplJoinMapper.class);
         job.setInputFormatClass(SequenceFileInputFormat.class);
-         
+             //note the job has no Reducer
         job.setOutputKeyClass(TextIntPair.class);
         job.setOutputValueClass(LongWritable.class);
-        
+
         job.setNumReduceTasks(0);
-        
+
         job.setOutputFormatClass(SequenceFileOutputFormat.class);
-        
-        
+
+
         job.addCacheFile(new Path("/data/companylist.tsv").toUri());
-        
-        
+
+
         Path outputPath = new Path(output);
         FileInputFormat.setInputPaths(job, StringUtils.join(input, ","));
         FileOutputFormat.setOutputPath(job, outputPath);
         outputPath.getFileSystem(conf).delete(outputPath, true);
         job.waitForCompletion(true);
         }
-    
+
     public static void main(String[] args) throws Exception {
         runJob(Arrays.copyOfRange(args, 0, args.length - 1), args[args.length - 1]);
     }
